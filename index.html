@@ -960,16 +960,7 @@
             </div>
 
             <div style="flex:2;min-width:320px">
-                <!-- contact form (non-functional placeholder that mails to your email if integrated later) -->
-                <!-- <form id="contactForm" style="display:flex;flex-direction:column;gap:10px">
                 <input name="name" placeholder="Your name" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff" />
-                <input name="email" placeholder="Your email" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff" />
-                <textarea name="message" rows="5" placeholder="Message" style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff"></textarea>
-                <div style="display:flex;gap:10px">
-                    <button class="btn" type="button" onclick="alert('Replace this with your form handler or email link')">Send Message</button>
-                    <button class="btn secondary" type="reset">Reset</button>
-                </div>
-                </form> -->
                 <form id="contactForm" style="display:flex;flex-direction:column;gap:10px">
                     <input id="name" name="name" placeholder="Your name" required style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff" />
                     <input id="email" name="email" placeholder="Your email" required style="padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff" />
@@ -1157,6 +1148,42 @@
     alert(result.success ? "✅ Message Sent!" : "❌ Error: " + result.error);
         });
     </script>
+
+    <!-- // For Email JS  -->
     
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+
+    <script>
+    (function() {
+        emailjs.init("roCKsbXsh-8wwU9CW"); // ✅ apna EmailJS Public Key yaha daalo
+    })();
+
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        // 1) Send mail to YOU (Notification)
+        emailjs.sendForm("service_j4zfikk", "template_083v8kb", this)
+        .then(() => {
+            console.log("Message sent to me ✅");
+
+            // 2) Send auto-reply to VISITOR
+            const formData = {
+            name: this.querySelector("[name='name']").value,
+            email: this.querySelector("[name='email']").value,
+            message: this.querySelector("[name='message']").value,
+            };
+
+            emailjs.send("service_j4zfikk", "template_dcezztm", formData)
+            .then(() => {
+                console.log("Auto reply sent ✅");
+                alert("Your message has been sent! Please check your email for confirmation.");
+            })
+            .catch((err) => console.error("Auto reply error:", err));
+        })
+        .catch((err) => console.error("Notification error:", err));
+    });
+    </script>
+
     </body>
     </html>
