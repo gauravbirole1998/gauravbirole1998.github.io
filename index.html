@@ -262,6 +262,32 @@ section{padding:60px 0;position:relative;z-index:2}
 .reveal{opacity:0;transform:translateY(18px);transition:all .7s cubic-bezier(.2,.9,.2,1)}
 .reveal.visible{opacity:1;transform:none}
 
+/* Wrapper around your logo div */
+.logo {
+  position: relative;
+}
+
+.logo::before,
+.logo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 14px; /* match your logo's border-radius */
+  background: #6450DC;
+  animation: pulse-ring 2.2s ease-out infinite;
+  z-index: -1;
+}
+
+.logo::after {
+  animation: pulse-ring 2.2s ease-out infinite 0.4s;
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1);    opacity: 0.55; }
+  70%  { transform: scale(1.55); opacity: 0;    }
+  100% { transform: scale(1.55); opacity: 0;    }
+}
+
 /* SECTION ACCENT LINE */
 .section-line{width:40px;height:3px;background:linear-gradient(90deg,var(--accent-a),var(--accent-b));border-radius:999px;margin-bottom:18px}
 
@@ -381,7 +407,7 @@ section{padding:60px 0;position:relative;z-index:2}
           <img src="images/mypic.png" alt="Gaurav Birole" onerror="this.parentElement.innerHTML='<span style=\'font-family:Syne;font-weight:800\'>GB</span>'">
         </div>
         <div class="hire-card">
-          <div class="hire-title">✅ Available for QA Roles</div>
+          <div class="hire-title">✅ Available for QA Roles AAAA</div>
           <p>Manual Testing · Automation Testing · API Testing<br>Regression · Test Case Design<br>Bhopal, India · Remote OK</p>
         </div>
       </aside>
